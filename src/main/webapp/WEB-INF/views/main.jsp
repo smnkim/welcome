@@ -5,6 +5,8 @@
 <head>
 	<meta charset="utf-8">
 	<title>BaseCamp.3rd by KSMN</title>
+	<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+	
 	<style type='text/css'>
     /* 화면 초기화 CSS */
 	*{

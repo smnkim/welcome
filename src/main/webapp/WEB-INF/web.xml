@@ -28,5 +28,16 @@
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>*.nhn</url-pattern>
 	</servlet-mapping>
-
+	<filter>
+	     <filter-name>encodingFilter</filter-name>
+    	 <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class> <!-- 한글처리 -->
+     <init-param>
+        <param-name>encoding</param-name>
+        <param-value>EUC-KR</param-value>
+     </init-param>
+  </filter>
+  <filter-mapping>   <!-- 모든 application 작동시 전부 적용시키겟다~ -->
+     <filter-name>encodingFilter</filter-name>
+     <url-pattern>/*</url-pattern>   <!-- 전부다~라는 의미 -->
+  </filter-mapping>
 </web-app>

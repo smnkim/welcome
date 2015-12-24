@@ -1,11 +1,19 @@
 package nhn.ksmn.web.board.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import nhn.ksmn.web.board.entity.Board;
@@ -26,9 +34,7 @@ public class BoardController {
 	    session.setAttribute("foot", "screen/footer.jsp");
 	    session.setAttribute("screen", "screen.jsp");	    
 	    
-	    
 	    mv.addObject("view", "../board/board.jsp");
-	    mv.addObject("boards", boardService.select());  
 
   		return mv;
 
@@ -82,4 +88,36 @@ public class BoardController {
 		return mv; 
 	}	
 		
+	
+	@ResponseBody
+   @RequestMapping("/selectallajax.nhn")
+   public ResponseEntity<String> selectallajax() throws Exception {
+      
+		ResponseEntity<String> returnData = null;
+		HttpHeaders header = new HttpHeaders();
+		header.add("Content-type", "application/json;charset=EUC-KR");
+      
+		
+      JSONArray ja = new JSONArray();
+      ArrayList<Object> result = new ArrayList<Object>();
+      
+      result = boardService.select();
+
+
+         for (Object obj : result) {
+            Board board = (Board) obj;
+
+            JSONObject jo = new JSONObject();
+            jo.put("no", board.getNo());
+            jo.put("title", board.getTitle());
+            jo.put("writer", board.getEmail());
+            jo.put("date", board.getLatest_time());
+            ja.put(jo);
+
+         }
+      returnData = new ResponseEntity<String>(ja.toString(), header, HttpStatus.CREATED);
+      
+      return returnData;
+   }
+
 }

@@ -9,7 +9,7 @@
     </insert >
     
     <select id="getBoards" resultType="nhn.ksmn.web.board.entity.Board">
-    	select * from board
+    	select * from board order by 7 desc
     </select >
     
     <select id="getBoard" resultType="nhn.ksmn.web.board.entity.Board">
