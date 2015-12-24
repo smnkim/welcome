@@ -1,0 +1,67 @@
+@CHARSET "UTF-8";
+/* 화면 초기화 CSS */
+*{
+	margin:0;padding:0;
+}
+a{
+	text-decoration: none;
+	color: black;
+}
+ul{
+	list-style: none;
+}
+header > div > #head_top > ul {
+	position: absolute;
+	right: 5px; top:3px;
+}
+header > div > #head_top > ul > li{
+	padding: 5px;
+	float: left;
+}
+ 
+/* UI CSS */
+header{
+	position: relative;	
+	margin: 0 auto;
+	width: 900px;
+	height: 170px;
+	background: pink;
+}
+ section{ 
+ 	margin: 0 auto; 
+ 	width: 900px; 
+ 	height: 650px; 
+ 	background: green; 
+ }
+ #left{
+ 	margin: 0 auto;
+ 	width: 200px; 
+ 	height: 650px; 
+ 	background: fuchsia; 
+ 	float: left; 
+ } 
+ #center{ 
+ 	margin: 0 auto; 
+ 	width: 700px; 
+ 	height: 650px; 
+ 	background: red; 
+ 	float: left; 
+ }
+#top{
+	margin: 0 auto;
+	width: 900px;
+	height: 400px;
+	background: green;
+}
+#bottom{
+	margin: 0 auto;
+	width: 900px;
+	height: 250px;
+	background: red;
+}
+footer{
+	margin: 0 auto;
+	width: 900px;
+	height: 60px;
+	background: gray;
+}
