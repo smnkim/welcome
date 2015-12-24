@@ -19,7 +19,7 @@ public class BoardDaoImpl implements BoardDao {
     }
 	@Override
 	public int insert(Object obj) throws Exception {
-		return sqlSession.insert("insertBoard");
+		return sqlSession.insert("insertBoard", obj);
 	}
 
 
@@ -37,13 +37,13 @@ public class BoardDaoImpl implements BoardDao {
 
 	@Override
 	public Object select(Object obj) throws Exception {
-		return null;
+		return sqlSession.selectOne("getBoard", obj);
 	}
 
 
 	@Override
 	public ArrayList<Object> select() {
-		return (ArrayList<Object>) sqlSession.selectList("getBoard");
+		return (ArrayList<Object>) sqlSession.selectList("getBoards");
 	}
 
 }

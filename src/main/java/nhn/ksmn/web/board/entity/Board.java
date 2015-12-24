@@ -27,9 +27,9 @@ public class Board {
 
 
 
-	public Board(String pwd) {
+	public Board(int no) {
 		super();
-		this.pwd = pwd;
+		this.no = no;
 	}
 
 

@@ -31,7 +31,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public Object select(Object obj) throws Exception {
-		return null;
+		return boardDao.select(obj);
 	}
 
 	@Override

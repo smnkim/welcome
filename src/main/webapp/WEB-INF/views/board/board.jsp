@@ -6,20 +6,22 @@
 </h1>
 <table border="1">
     <tr align="center">
-        <td>no</td>
-        <td>title</td>
-        <td>writer</td>
-        <td>hit</td>
+        <td>번호</td>
+        <td>제목</td>
+        <td>작성자</td>
+        <td>최근수정일</td>
+        <td>조회수</td>
     </tr>
 <c:forEach var="board" items="${boards}">
     <tr align="center">
         <td>${board.no}</td>
-        <td>${board.title}</td>
+        <td><a href="confirmpwd.nhn?no=${board.no }">${board.title}</a></td>
         <td>${board.email}</td>
+        <td>${board.latest_time }</td>
         <td>0</td>
     </tr>
 </c:forEach>
 	<tr>
-		<td colspan="4"><a href="register.nhn">글쓰기</a></td>
+		<td colspan="5"><a href="register.nhn">글쓰기</a></td>
 	</tr>
 </table>

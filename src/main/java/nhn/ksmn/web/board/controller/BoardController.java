@@ -45,11 +45,41 @@ public class BoardController {
    }
 	@RequestMapping("/registerimpl.nhn")
 	public String registerimpl(Board b) throws Exception {
-		System.out.println(b.toString());
-//		Board newBoard = new Board(b.getEmail(), b.getPwd(), b.getTitle(), b.getContent());
-		Board newBoard = new Board("kimseamina@naver.com", "1234", "바보멍청이이이", "ㅋㅋㅋㅋㅋㅋㅋㅋㅋ");
+		//이메일 형식이 올바른지 서버 쪽, 클라이언트 쪽 모두에서 체크
+		
+		Board newBoard = new Board(b.getEmail(), b.getPwd(), b.getTitle(), b.getContent());
 		boardService.insert(newBoard);
 		
 		return "redirect:/main.nhn";
 	}	
+	
+	
+	@RequestMapping("/confirmpwd.nhn")
+	public ModelAndView confirmpwd(String no) throws Exception {
+		ModelAndView mv = new ModelAndView("main");
+
+		mv.addObject("pno", no);
+	    mv.addObject("view", "../board/confirmpwd.jsp");
+
+  		return mv;
+
+	}
+
+	@RequestMapping("/confirmpwdimpl.nhn")
+	public ModelAndView confirmpwdimpl(int pno, String pwd) throws Exception {
+		ModelAndView mv = new ModelAndView("main");
+		
+		Board newBoard = new Board(pno);
+		Board getBoard = (Board) boardService.select(newBoard);
+		
+		if(getBoard.getPwd() != null && getBoard.getPwd().equals(pwd)){
+			
+			mv.addObject("view", "../board/update.jsp");
+			
+		}else{
+			mv.addObject("view", "../board/failpwd.jsp");
+		}
+		return mv; 
+	}	
+		
 }
