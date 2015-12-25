@@ -7,7 +7,11 @@
         (email, pwd, title, content, origial_time, latest_time) 
         values( #{email}, #{pwd}, #{title},  #{content}, sysdate(), sysdate())
     </insert >
-    
+    <update id="updateBoard" parameterType="nhn.ksmn.web.board.entity.Board">
+		update board
+		set title=#{title}, content=#{content}, latest_time=sysdate()
+		where no=#{no}
+	</update>
     <select id="getBoards" resultType="nhn.ksmn.web.board.entity.Board">
     	select * from board order by 7 desc
     </select >

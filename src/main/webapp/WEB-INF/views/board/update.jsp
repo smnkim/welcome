@@ -4,23 +4,21 @@
 <h1>
     Update  
 </h1>
-<form action="registerimpl.nhn" method="post">
+<form action="updateimpl.nhn" method="post">
+<input type="hidden" name=no value="${board.no }">
 <table>
 	<tbody>
 		<tr>
-    		<td>email</td><td><input type="text" name="email"></td>
+    		<td>email</td><td><input type="text" name="email" value ="${board.email }" disabled="disabled"></td>
 	    </tr>
 	    <tr>
-	    	<td>pwd</td><td><input type="password" name="pwd"></td>
+	        <td>title</td><td><input type="text" name="title" value = "${board.title }"></td>
 	    </tr>
 	    <tr>
-	        <td>title</td><td><input type="text" name="title"></td>
-	    </tr>
-	    <tr>
-	        <td>content</td><td><textarea cols="30" rows="15" name="content"></textarea></td>
+	        <td>content</td><td><textarea cols="30" rows="15" name="content">${board.content }</textarea></td>
 	    </tr>
 		<tr>
-			<td colspan="2"><input type="submit" value="등록"></td>
+			<td colspan="2"><input type="submit" value="수정"></td>
 		</tr>
 	</tbody>
     

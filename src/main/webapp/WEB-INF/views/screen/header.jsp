@@ -2,5 +2,5 @@
    pageEncoding="EUC-KR"%>
 
   <div>
-  ToastRookie_Board
+  <a href="main.nhn">ToastRookie_Board</a>
   </div>

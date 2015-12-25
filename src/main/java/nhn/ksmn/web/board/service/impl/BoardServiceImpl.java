@@ -26,7 +26,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public int update(Object obj) throws Exception {
-		return 0;
+		return boardDao.update(obj);
 	}
 
 	@Override

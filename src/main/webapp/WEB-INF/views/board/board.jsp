@@ -13,7 +13,7 @@ function display(data){
 	$(data).each(function(index, item){
 		output += '<tr>';
 			with(item){
-				output += '<td ><a href="confirmpwd.nhn?no='+ no +'">' + no + '</a></td>';
+				output += '<td ><a href="myboard.nhn?no='+ no +'">' + no + '</a></td>';
 				output += '<td>' + title + '</td>';
 				output += '<td>' + writer + '</td>';
 				output += '<td>' + date + '</td>';

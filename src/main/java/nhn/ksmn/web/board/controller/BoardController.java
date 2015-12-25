@@ -60,11 +60,24 @@ public class BoardController {
 	}	
 	
 	
-	@RequestMapping("/confirmpwd.nhn")
-	public ModelAndView confirmpwd(String no) throws Exception {
+	@RequestMapping("/myboard.nhn")
+	public ModelAndView myboard(int no) throws Exception {
 		ModelAndView mv = new ModelAndView("main");
 
-		mv.addObject("pno", no);
+		Board getBoard = (Board) boardService.select(new Board(no));
+		
+	    mv.addObject("view", "../board/myboard.jsp");
+		mv.addObject("board", getBoard);
+  		
+		return mv;
+
+	}
+	
+	@RequestMapping("/confirmpwd.nhn")
+	public ModelAndView confirmpwd(int no) throws Exception {
+		ModelAndView mv = new ModelAndView("main");
+
+		mv.addObject("no", no);
 	    mv.addObject("view", "../board/confirmpwd.jsp");
 
   		return mv;
@@ -72,52 +85,59 @@ public class BoardController {
 	}
 
 	@RequestMapping("/confirmpwdimpl.nhn")
-	public ModelAndView confirmpwdimpl(int pno, String pwd) throws Exception {
+	public ModelAndView confirmpwdimpl(int no, String pwd) throws Exception {
 		ModelAndView mv = new ModelAndView("main");
 		
-		Board newBoard = new Board(pno);
+		Board newBoard = new Board(no);
 		Board getBoard = (Board) boardService.select(newBoard);
 		
 		if(getBoard.getPwd() != null && getBoard.getPwd().equals(pwd)){
 			
 			mv.addObject("view", "../board/update.jsp");
+			mv.addObject("board", getBoard);
 			
 		}else{
 			mv.addObject("view", "../board/failpwd.jsp");
 		}
 		return mv; 
 	}	
+	
+	@RequestMapping("/updateimpl.nhn")
+	public String updateimpl(Board b) throws Exception {
 		
+		Board newBoard = new Board(b.getNo(), b.getTitle(), b.getContent());
+		boardService.update(newBoard);
+		
+		return "redirect:/main.nhn";
+	}	
 	
 	@ResponseBody
-   @RequestMapping("/selectallajax.nhn")
-   public ResponseEntity<String> selectallajax() throws Exception {
+	@RequestMapping("/selectallajax.nhn")
+	public ResponseEntity<String> selectallajax() throws Exception {
       
 		ResponseEntity<String> returnData = null;
 		HttpHeaders header = new HttpHeaders();
 		header.add("Content-type", "application/json;charset=EUC-KR");
-      
 		
-      JSONArray ja = new JSONArray();
-      ArrayList<Object> result = new ArrayList<Object>();
+		JSONArray ja = new JSONArray();
+		ArrayList<Object> result = new ArrayList<Object>();
       
-      result = boardService.select();
+		result = boardService.select();
 
-
-         for (Object obj : result) {
-            Board board = (Board) obj;
-
+		for (Object obj : result) {
+    	  	Board board = (Board) obj;
             JSONObject jo = new JSONObject();
+            
             jo.put("no", board.getNo());
             jo.put("title", board.getTitle());
             jo.put("writer", board.getEmail());
             jo.put("date", board.getLatest_time());
+            
             ja.put(jo);
-
-         }
-      returnData = new ResponseEntity<String>(ja.toString(), header, HttpStatus.CREATED);
-      
-      return returnData;
-   }
+		}
+		returnData = new ResponseEntity<String>(ja.toString(), header, HttpStatus.CREATED);
+		
+		return returnData;
+	}
 
 }

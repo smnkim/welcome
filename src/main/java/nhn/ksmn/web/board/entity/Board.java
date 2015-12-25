@@ -27,6 +27,15 @@ public class Board {
 
 
 
+	public Board(int no, String title, String content) {
+		super();
+		this.no = no;
+		this.title = title;
+		this.content = content;
+	}
+
+
+
 	public Board(int no) {
 		super();
 		this.no = no;
