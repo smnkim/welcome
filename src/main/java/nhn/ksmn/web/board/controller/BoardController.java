@@ -18,12 +18,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import nhn.ksmn.web.board.entity.Board;
 import nhn.ksmn.web.board.service.BoardService;
+import nhn.ksmn.web.board.util.EmailValidator;
 
 @Controller
 public class BoardController {
 	@Autowired
-	 BoardService boardService;
-
+	BoardService boardService;
+	
+	EmailValidator emailValidator;
+	
 	@RequestMapping("/main.nhn")
 	public ModelAndView main(HttpServletRequest request) throws Exception {
 		
@@ -52,9 +55,14 @@ public class BoardController {
 	@RequestMapping("/registerimpl.nhn")
 	public String registerimpl(Board b) throws Exception {
 		//이메일 형식이 올바른지 서버 쪽, 클라이언트 쪽 모두에서 체크
+		emailValidator =  new EmailValidator();
 		
-		Board newBoard = new Board(b.getEmail(), b.getPwd(), b.getTitle(), b.getContent());
-		boardService.insert(newBoard);
+		if(emailValidator.validate(b.getEmail()) == false){
+			System.out.println("이메일 양식 올바르지 않기 때문에 DB에 insert할 수 없습니다.");
+		}else{
+			Board newBoard = new Board(b.getEmail(), b.getPwd(), b.getTitle(), b.getContent());
+			boardService.insert(newBoard);
+		}
 		
 		return "redirect:/main.nhn";
 	}	
