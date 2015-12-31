@@ -5,7 +5,7 @@
  	<insert id ="insertBoard" parameterType="nhn.ksmn.web.board.entity.Board">
         
         <selectKey resultType="java.lang.Integer" keyProperty="no">
-        	select no from board where email=#{email}
+        	select count(*) from board
         </selectKey>
         insert into board 
         (email, pwd, title, content, origial_time, latest_time) 
